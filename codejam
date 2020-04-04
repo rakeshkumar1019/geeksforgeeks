@@ -1,0 +1,94 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+long long int help(vector<long long  int> temp){
+    long long  int count=0;
+     
+    sort(temp.begin(),temp.end());
+   for(long long int i=0;i<temp.size()-1;i++){
+       if(temp[i]==temp[i+1]){
+           count++;
+       }
+   } 
+   return count;
+}
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
+   long long  int t;
+    cin>>t;
+    for(long long  int test=1;test<=t;test++){
+        long long int n;
+        cin>>n;
+        long long int** arr=new long long  int*[n];
+        for(long long int i=0;i<n;i++){
+            arr[i]=new long long int[n];
+            for(long long int j=0;j<n;j++){
+                cin>>arr[i][j];
+            }
+        }
+        long long int k=0;
+        for(long long int i=0;i<n;i++){
+            for(long long int j=0;j<n;j++){
+                if(i==j){
+                    k+=arr[i][j];
+                }
+            }
+        }
+        
+       
+        
+        long long int r=0;
+        for(long long int i=0;i<n;i++){
+            vector<long long int> temp;
+            for(long long int j=0;j<n;j++){
+                temp.push_back(arr[j][i]);
+            }
+            long long int t=help(temp);
+            if(t>r){
+                r=t;
+            }
+            
+        }
+        if(r>0){
+            r++;
+        }
+         
+        
+        
+        
+       long long  int c=0;
+        for(long long int i=0;i<n;i++){
+            vector<long long int> temp1;
+            for(long long int j=0;j<n;j++){
+                temp1.push_back(arr[i][j]);
+            }
+            long long int t1=help(temp1);
+            if(t1>c){
+                c=t1;
+            }
+            
+        }
+        if(c>0){
+            c++;
+        }
+        
+        
+        
+        cout<<"Case"<<" "<<"#"<<test<<":"<<" "<<k<<" "<<c<<" "<<r<<endl;
+        
+         
+        
+        
+        
+        
+        //deleting 2d array
+        for(int i=0;i<n;i++){
+            delete [] arr[i];
+        }
+        delete [] arr;
+        
+    }
+}
